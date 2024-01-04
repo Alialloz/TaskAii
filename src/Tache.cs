@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace TaskAii
 {
@@ -6,19 +8,41 @@ namespace TaskAii
     {
         public string Nom { get; set; }
         public TimeSpan Duree { get; set; }
-        public int Importance { get; set; } // Could be represented on a scale, e.g., 1-5
+        public int Importance { get; set; }
         public DateTime Deadline { get; set; }
-        public string Prerecquis { get; set; }
+        public string Prerequis { get; set; }
+        public List<Tache> SousTaches { get; set; }
 
-        public Task(string nom, TimeSpan duree, int importance, DateTime deadline, string prerecquis)
+        public Tache(string nom, TimeSpan duree, int importance, DateTime deadline, string prerequis)
         {
             Nom = nom;
             Duree = duree;
             Importance = importance;
             Deadline = deadline;
-            Prerecquis = prerecquis;
+            Prerequis = prerequis;
+            SousTaches = new List<Tache>();
         }
 
-        // Additional methods like UpdateTask, CompleteTask etc. can be added here.
+        public void AjouterSousTache(Tache sousTache)
+        {
+            SousTaches.Add(sousTache);
+        }
+
+        public void RetirerSousTache(Tache sousTache)
+        {
+            SousTaches.Remove(sousTache);
+        }
+
+        // Calculer la durée totale en incluant les sous-tâches
+        public TimeSpan CalculerDureeTotale()
+        {
+            var dureeTotale = Duree;
+            foreach (var sousTache in SousTaches)
+            {
+                dureeTotale += sousTache.CalculerDureeTotale();
+            }
+            return dureeTotale;
+        }
+
     }
 }
