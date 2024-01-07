@@ -23,6 +23,22 @@ namespace TaskAii
             return taches.Remove(tache);
         }
 
+        public bool ModifierTache(string nomTache, TimeSpan nouvelleDuree, int nouvelleImportance, DateTime nouvelleDeadline, string nouveauxPrerequis)
+        {
+            var tacheAModifier = taches.FirstOrDefault(t => t.Nom == nomTache);
+
+            if (tacheAModifier != null)
+            {
+                tacheAModifier.Duree = nouvelleDuree;
+                tacheAModifier.Importance = nouvelleImportance;
+                tacheAModifier.Deadline = nouvelleDeadline;
+                tacheAModifier.Prerequis = nouveauxPrerequis;
+                return true; // Modification réussie
+            }
+            return false; // Aucune tâche trouvée avec ce nom
+        }
+
+
         public List<Tache> GetTachesAvantDeadline(DateTime deadline)
         {
             return taches.Where(tache => tache.Deadline <= deadline).ToList();
@@ -34,4 +50,4 @@ namespace TaskAii
         }
 
     }
-}
+}                                 
