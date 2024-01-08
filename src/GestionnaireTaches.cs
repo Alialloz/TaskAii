@@ -7,10 +7,12 @@ namespace TaskAii
     public class GestionnaireTaches
     {
         private List<Tache> taches;
+        private List<Tache> tachesCompletees;
 
         public GestionnaireTaches()
         {
             taches = new List<Tache>();
+            tachesCompletees = new List<Tache>();
         }
 
         public void AjouterTache(Tache tache)
@@ -33,11 +35,10 @@ namespace TaskAii
                 tacheAModifier.Importance = nouvelleImportance;
                 tacheAModifier.Deadline = nouvelleDeadline;
                 tacheAModifier.Prerequis = nouveauxPrerequis;
-                return true; // Modification réussie
+                return true;
             }
-            return false; // Aucune tâche trouvée avec ce nom
+            return false;
         }
-
 
         public List<Tache> GetTachesAvantDeadline(DateTime deadline)
         {
@@ -49,5 +50,22 @@ namespace TaskAii
             return taches.OrderByDescending(tache => tache.Importance).ToList();
         }
 
+        public bool MarquerCommeCompletee(string nomTache)
+        {
+            var tacheACompleter = taches.FirstOrDefault(t => t.Nom == nomTache);
+
+            if (tacheACompleter != null)
+            {
+                taches.Remove(tacheACompleter);
+                tachesCompletees.Add(tacheACompleter);
+                return true;
+            }
+            return false;
+        }
+
+        public List<Tache> GetTachesCompletees()
+        {
+            return tachesCompletees;
+        }
     }
-}                                 
+}
