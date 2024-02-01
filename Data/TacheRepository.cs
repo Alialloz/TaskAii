@@ -38,5 +38,13 @@ namespace TaskAii.Data
             taches.Remove(tache);
             SaveTaches(taches);
         }
+
+        public void UpdateTache(Tache tache)
+        {
+            List<Tache> taches = LoadTaches();
+            int index = taches.FindIndex(t => t.Id == tache.Id);
+            taches[index] = tache;
+            SaveTaches(taches);
+        }
     }
 }
