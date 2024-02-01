@@ -31,5 +31,12 @@ namespace TaskAii.Data
             taches.Add(tache);
             SaveTaches(taches);
         }
+
+        public void RemoveTache(Tache tache)
+        {
+            List<Tache> taches = LoadTaches();
+            taches.Remove(tache);
+            SaveTaches(taches);
+        }
     }
 }
