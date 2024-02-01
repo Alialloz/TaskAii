@@ -46,5 +46,10 @@ namespace TaskAii.Data
             taches[index] = tache;
             SaveTaches(taches);
         }
+
+        public void RemoveAllTaches()
+        {
+            SaveTaches(new List<Tache>());
+        }
     }
 }
