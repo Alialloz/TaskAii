@@ -65,5 +65,12 @@ namespace TaskAii.Data
             taches.RemoveAll(t => t.Status == status);
             SaveTaches(taches);
         }
+
+        public void RemoveAllTachesByPriority(string priority)
+        {
+            List<Tache> taches = LoadTaches();
+            taches.RemoveAll(t => t.Priority == priority);
+            SaveTaches(taches);
+        }
     }
 }
