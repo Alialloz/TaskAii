@@ -72,5 +72,12 @@ namespace TaskAii.Data
             taches.RemoveAll(t => t.Priority == priority);
             SaveTaches(taches);
         }
+
+        public void RemoveAllTachesByDate(string date)
+        {
+            List<Tache> taches = LoadTaches();
+            taches.RemoveAll(t => t.Date == date);
+            SaveTaches(taches);
+        }
     }
 }
