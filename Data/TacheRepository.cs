@@ -51,5 +51,12 @@ namespace TaskAii.Data
         {
             SaveTaches(new List<Tache>());
         }
+
+        public void RemoveAllTachesByCategory(string category)
+        {
+            List<Tache> taches = LoadTaches();
+            taches.RemoveAll(t => t.Category == category);
+            SaveTaches(taches);
+        }
     }
 }
