@@ -24,6 +24,12 @@ namespace TaskAii.Data
             string json = JsonConvert.SerializeObject(taches);
             File.WriteAllText(FilePath, json);
         }
-        
+
+        public void AddTache(Tache tache)
+        {
+            List<Tache> taches = LoadTaches();
+            taches.Add(tache);
+            SaveTaches(taches);
+        }
     }
 }
